@@ -1,0 +1,44 @@
+{% extends './final-app/home/base.html' %}
+
+{% block title %}Mis Archivos{% endblock %}
+
+{% block body %}
+  <div class="d-flex justify-content-between align-items-center">
+    <h1>Mis Archivos</h1>
+    <h3>{{ current_user.username }}</h3>
+  </div>
+  <hr>
+  {% if files %}
+    <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4">
+      
+        {% for file in files %}
+          <div class="col" style="max-width: 19rem; min-width:17rem">
+            <div class="card mb-2" >
+                <!-- <img src="{{file[3]}}" class="card-img-top img-fluid" alt="" height="180"> -->
+                <div class="card-header d-flex justify-content-center">
+                  <h6 class="card-title fw-bold">{{ file[1] }}</h6>
+                </div>
+                <div class="card-body">
+                  
+                  <h6 class="card-subtitle mb-2 lh-1">Tipo: <span class="text-muted">{{ file[4] }}</span></h6>
+
+                  <div class="d-flex justify-content-center">
+                    <a href="/detalles-archivo/{{file[2]}}" class="card-link fw-bold" style="text-decoration: none;">Detalles</a>
+                    <a href="/editar-archivo/{{file[1]}}/{{file[2]}}" class="card-link fw-bold" style="text-decoration: none;">Editar</a>
+                    <a href="/eliminar-archivo/{{file[2]}}" class="card-link link-danger fw-bold" style="text-decoration: none;">Eliminar</a>
+                  </div>
+
+                </div>
+              </div>
+          </div>
+
+        {% endfor %}
+      
+    </div>
+    {% endif %}
+
+    {% if not files %}
+        <h3 class="display-6">No hay Archivos por mostrar...</h3>
+    {% endif %}
+
+{% endblock %}

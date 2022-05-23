@@ -1,0 +1,59 @@
+{% extends './final-app/home/base.html' %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block body %}
+
+
+<div class="d-flex flex-column align-items-center">
+    {% if action == 'subir' %}
+    <h1>Subir un nuevo Archivo</h1>
+    {% endif %}
+    {% if action == 'editar' %}
+    <h1>Editar un Archivo</h1>
+    {% endif %}
+    <div class="col-lg-6 col-sm-12">
+        
+        {% if action == 'subir' %}
+            <form  action="{{ url_for('subirArchivosPost') }}" method="POST" enctype="multipart/form-data">
+        {% endif %}
+        {% if action == 'editar' %}
+            <form  action="/editar-archivo/{{nombre}}/{{filename}}" method="POST" enctype="multipart/form-data">
+        {% endif %}
+            <div class="d-flex flex-column align-items-start">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+                <input class="form-control form-control-lg mt-3" name="nombreArchivo" id="nombreArchivo" type="text" value="{{ nombre }}" placeholder="Ingresa un nombre para el archivo" autocomplete="off">
+                <label for="nombreArchivo" class="form-text" >
+                    * Nombre del archivo Obligatorio
+                </label>
+                <input class="form-control form-control-lg mt-3" name="file" id="file" type="file">
+                <label for="file" class="form-text">
+                    * Archivo Obligatorio
+                </label>
+                <button type="submit" class="btn btn-primary btn-lg my-3">
+                    {% if action == 'subir' %}
+                        Subir
+                    {% endif %}
+                    {% if action == 'editar' %}
+                        Editar
+                    {% endif %}
+                </button>
+            </div>
+        </form>
+        <div class="col-lg-8 col-sm-12">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-warning alert-dismissible" role="alert">
+                        <strong>{{ message }}</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

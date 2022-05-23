@@ -1,0 +1,101 @@
+{% extends './final-app/auth/base-auth.html' %}
+
+{% block customCSS %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registro_login.css') }}">
+{% endblock %}
+
+
+{% block title %}
+  {% if pagina == 'Registro'%}Registro{% endif %}
+  {% if pagina == 'Iniciar sesion'%}Login{% endif %}
+{% endblock %}
+
+{% block body %}
+
+{% if pagina == 'Registro'%}
+  <form class="form-signin text-center" action="{{ url_for('registrarUsuario') }}" method="POST">
+{% endif %}
+
+{% if pagina == 'Iniciar sesion'%}
+  <form class="form-signin text-center" action="{{ url_for('loginPost') }}" method="POST">
+{% endif %}
+
+  <img class="mb-1" src="{{ url_for('static', filename='img/black-clover.png') }}" alt="" width="95" height="95">
+  <h1 class="mb-3 fw-normalfinal-app">{{ pagina }}</h1>
+
+  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+
+  {% if pagina == 'Registro'%}
+    <div class="form-floating mb-2">
+      <input type="text" class="form-control" name="username" id="floatingInputName" value="{{ username }}" placeholder="Nombre de usuario">
+      <label for="floatingInputName">Nombre de usuario</label>
+    </div>
+  {% endif %}
+  
+  <div class="form-floating mb-2">
+    <input type="email" class="form-control" name="email" id="floatingInputEmail" value="{{ email }}" placeholder="micorreo@ejemplo.com">
+    <label for="floatingInputEmail">Email</label>
+  </div>
+  <div class="form-floating mb-2">
+    <input type="password" class="form-control" name="password" id="floatingPassword" placeholder="Contraseña">
+    <label for="floatingPassword">Contraseña</label>
+    {% if pagina == 'Registro' %}
+      <span class="fw-lighter" id="passwordHelpBlock">
+        Minimo 8 caracteras, una Mayuscula, un Numero y un Caracter especial.
+      </span>
+    {% endif %}
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        {% if category == 'warning' %}
+          <div class="alert alert-warning alert-dismissible d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>{{ message }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+        {% if category == 'success' %}
+          <div class="alert alert-success d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <div>
+              {{message}}. ir a <a href="{{url_for('login')}}" class="link-success" style="text-decoration: underline;">Iniciar sesion</a>
+            </div>
+          </div>
+        {% endif %}
+        {% if category == 'error' %}
+          <div class="alert alert-danger alert-dismissible d-flex align-items-center" role="alert">
+            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Warning:"><use xlink:href="#exclamation-triangle-fill"/></svg>
+            <div>{{ message }}</div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+
+  {% if pagina == 'Registro'%}
+    <a href="{{ url_for('login') }}">¿Ya tienes una cuenta? Inicia sesion.</a>
+  {% endif %}
+
+  <div class="d-flex flex-column align-itemns-center">
+    {% if pagina == 'Iniciar sesion'%}
+      <a href="{{ url_for('registro') }}">¿No tienes una cuenta? Registrate.</a>
+    {% endif %}
+    {% if pagina == 'Iniciar sesion'%}
+      <a href="{{ url_for('cambiarPassword') }}">Olvide mi contraseña.</a>
+    {% endif %}
+  </div>
+
+  <button class="w-100 btn btn-lg btn-primary mt-2 mb-3" type="submit">
+    {% if pagina == 'Registro'%}Registrarme{% endif %}
+    {% if pagina == 'Iniciar sesion'%}Ingresar{% endif %}
+  </button>
+  
+  <p class="mb-3 text-muted">&copy; 2022 PA - Instituto Tecnologico del Putumayo</p>
+  
+</form>
+
+{% endblock %}

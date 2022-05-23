@@ -1,0 +1,33 @@
+{% extends './final-app/home/base.html' %}
+
+{% block title %}Detalles{% endblock %}
+
+{% block body %}
+<div class="d-flex align-items-center justify-content-center h-100">
+    <div class="col-12 col-sm-8 col-md-6 col-lg-5">
+        <h1 class="mb-1" hidden>Detalles</h1>
+        <div class="card ">
+            <div class="d-flex justify-content-center img-fluid m-1 ">
+                <img src="{{file[6]}}" class="card-img-top" style="max-width: max-content;max-height: max-content;" alt="{{file[1]}}">
+            </div>
+            <div class="card-header d-flex justify-content-center">
+                <h5 class="card-title">{{ file[1] }}</h5>
+            </div>
+            <div class="card-body">
+                <a href="{{ file[3] }}" class="text-decoration-none fw-bold text-primary" target="blank">
+                    <h5 class="card-subtitle mb-2 text-center">{{ file[2] }}</h5>
+                </a>
+                <hr>
+                <div class="d-flex justify-content-around">
+                    <h5 class="card-subtitle mb-2 lh-1">Tipo: <span class="text-muted">{{ file[4] }}</span></h5>
+                    <h5 class="card-subtitle mb-2">Megas: <span class="text-muted">{{ file[5] }}MB</h5>
+                </div>
+                <hr>
+                <input class="form-control fst-italic fw-bold text-muted" type="text" value="{{url}}" aria-label="readonly input example" readonly>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}

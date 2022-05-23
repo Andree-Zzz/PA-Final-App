@@ -1,0 +1,30 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 350px;
+  padding: 10px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
