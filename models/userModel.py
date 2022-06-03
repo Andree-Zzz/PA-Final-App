@@ -122,7 +122,7 @@ class UserModel():
             ))
             url = request.host_url+"confirm/"+token
             cursor.close()
-            emailBienvenida(user.username, user.email,url)
+            emailBienvenida(user.username, user.email, url)
         except Exception as ex:
             raise Exception(ex)
     

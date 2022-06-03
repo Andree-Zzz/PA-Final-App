@@ -22,10 +22,10 @@ def guardarFile(nombre, file, userId, filenameEditar = ''):
     if file:
         filename = date+file.filename
         pathFile = '/static/files/'+filename
-        file.save('./src'+pathFile)
+        file.save('.'+pathFile)
         tipo = _getTypeFileByFilename(file.filename)
         iconFile = _setIconFile(filename)
-        megas = (os.path.getsize('./src'+pathFile))/1048576
+        megas = (os.path.getsize('.'+pathFile))/1048576
         fileModel.guardarFile(filenameEditar,nombre, filename, pathFile, tipo, megas, iconFile, userId)
     else:
         fileModel.guardarFile(filenameEditar,nombre)

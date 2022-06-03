@@ -1,0 +1,22 @@
+{% extends './final-app/home/base.html' %}
+
+{% block customCSS %}
+<link rel="stylesheet" href="static/css/background.css">
+{% endblock %}
+
+{% block title %}Obtenen el texto dentro de una imagen{% endblock %}
+
+{% block body %}
+    <div class="d-flex flex-column align-items-center justify-content-center" style="height: 90vh;">
+        <a href="{{url_for('getTextFromImage')}}" class="my-3" style="text-decoration: none;">
+            <h1 class="display-5">Obten el texto dentro de una imagen</h1>
+        </a>
+        
+        {% block content %}
+        {% endblock %}
+    </div>
+{% endblock %}
+
+
+{% block customJS %}
+{% endblock %}

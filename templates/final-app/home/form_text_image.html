@@ -1,0 +1,18 @@
+{% extends './final-app/home/base_text_image.html' %}
+
+{% block content %}
+<div class="d-flex flex-column align-items-center">
+    <form action="{{url_for('procesar_imagen')}}" class="mb-3" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="d-flex gap-3">
+            <input class="form-control" type="file" accept="image/*" name="imagen" id="imagen">
+            <button class="btn btn-primary" type="submit">Procesar</button>
+        </div>
+    </form>
+    <img id="previewImg" style="max-width: 450px;">
+</div>
+{% endblock %}
+
+{% block customJS %}
+<script src="static/js/preview-img.js"></script>
+{% endblock %}

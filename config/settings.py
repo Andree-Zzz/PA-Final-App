@@ -12,6 +12,8 @@ MYSQL_PASSWORD = os.environ.get('MYSQL_PASSWORD')
 MYSQL_DATABASE = os.environ.get('MYSQL_DATABASE')
 MYSQL_PORT = os.environ.get('MYSQL_PORT')
 
+PATH_TESSERACT_CMD = os.environ.get('PATH_TESSERACT_CMD')
+
 SMTP_HOSTNAME = os.environ.get('SMTP_HOSTNAME')
 SMTP_USERNAME = os.environ.get('SMTP_USERNAME')
 SMTP_PASSWORD = os.environ.get('SMTP_PASSWORD')

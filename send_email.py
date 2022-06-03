@@ -12,14 +12,14 @@ def emailBienvenida(username, email, url):
     send_email(
         asunto='Bienvenido, Registro Exitoso',
         destinatario=email,
-        msg_html=render_template("sistema-archivos/mails/bienvenidaMail.html", username = username, url = url)
+        msg_html=render_template("final-app/mails/bienvenidaMail.html", username = username, url = url)
     )
 
 def emailCambiarPassword(username, email, url):
     send_email(
         asunto='Cambiar mi contraseña',
         destinatario=email,
-        msg_html=render_template("sistema-archivos/mails/cambiarContraseñaMail.html", username = username, url = url)
+        msg_html=render_template("final-app/mails/cambiarContraseñaMail.html", username = username, url = url)
     )
 
 def send_email(asunto, destinatario, msg_html):

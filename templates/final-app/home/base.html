@@ -50,6 +50,12 @@
             <ion-icon name="link" size="large"></ion-icon>
           </a>
         </li>
+        <li>
+          <a href="{{ url_for('getTextFromImage') }}" id="getTextFromImage"
+             class="nav-link py-3 border-bottom" title="Obtene el texto dentro de una imagen" data-bs-toggle="tooltip" data-bs-placement="right">
+             <ion-icon name="text" size="large"></ion-icon>
+          </a>
+        </li>
       </ul>
       <div class="dropdown border-top">
         <a href="#"
@@ -80,7 +86,12 @@
   <!-- Core theme JS-->
   <script src="{{ url_for('static', filename='js/sidebars.js') }}""></script>
 
+  <!-- Ionic icons -->
   <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Custom JS -->
+  {% block customJS %}
+  {% endblock %}
 </body>
 
 </html>

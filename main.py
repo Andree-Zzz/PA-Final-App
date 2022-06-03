@@ -7,9 +7,7 @@ from models.entitites.user_entity import User
 from config.settings import SECRET_KEY
 from send_email import emailCambiarPassword
 
-from controllers import fileController
-from controllers import userController
-from controllers import acortadorController
+from controllers import fileController, userController, acortadorController, ocr_controller
 
 
 app = Flask(__name__)
@@ -225,13 +223,36 @@ def redirect_url_short(url_short):
     else:
         return redirect(url_for('index'))
 
-# No autorizado
 
+# *Obtener el texto dentro de una imagen
+
+@app.get("/get-text-from-image")
+def getTextFromImage():
+    return render_template("final-app/home/form_text_image.html")
+
+@app.post("/get-text-from-image")
+def procesar_imagen():
+    ocr_controller.deleteFiles()
+    # Obtener la imagen del formulario
+    imagen = request.files['imagen']
+    # Evaluar si envio una imagen o no dentro del formulario
+    if imagen:
+        # Guardar la imagen y obtener su ruta de ubicacion
+        pathImage = ocr_controller.saveImage(imagen)
+        # Procesar la imagen y obtener su texto 
+        # recibiendo su ruta de ubicacion (por ahora Funciona con texto en Ingles)
+        text_image = ocr_controller.getTextImage(pathImage)
+        return render_template('final-app/home/resp_text_image.html', text_image = text_image, pathImage = pathImage)
+    else:
+        # TODO: Feedback seleccionar imagen
+        return redirect(url_for('getTextFromImage'))
+
+
+# No autorizado
 def status_401(error):
     return redirect(url_for('login'))
 
 # Pagina no encontrada
-
 def status_404(error):
     
     return "<h1>404: Pagina no encontrada...<h1/>"
